@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pre-rendered Cubes</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        /* Optional: Add CSS styles here */
+        #model-viewer {
+            width: 400px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Cube</h1>
+
+    <label for="cube-select">Cube:</label>
+    <select id="cube-select">
+        <option value="cube_red_long.glb">Red Long Cuboid</option>
+        <option value="cube_blue_small.glb">Blue Small Cube</option>
+        <option value="cube_orange_big.glb">Orange Big Cube</option>
+    </select>
+
+    <label for="color">Color:</label>
+    <input type="color" id="color" value="#ff0000">
+
+
+    <button onclick="displayCube()">Display Cube</button>
+
+    <model-viewer id="model-viewer" alt="Cube" auto-rotate camera-controls shadow-intensity="1"></model-viewer>
+
+
+    <script>
+        function displayCube() {
+            const selectedCube = document.getElementById('cube-select').value;
+             const color = document.getElementById('color').value;
+            // Replace with your actual GitHub Pages URL:
+            const modelURL = `https://therealpsdn.github.io/personal/glb-models/${selectedCube}`;
+
+            const modelViewer = document.getElementById('model-viewer');
+            modelViewer.src = modelURL;
+
+
+           modelViewer.querySelectorAll('[material-name="CubeMaterial"]').forEach(element => {
+              element.setAttribute("material-color", color)
+             })
+        }
+    </script>
+</body>
+</html>
